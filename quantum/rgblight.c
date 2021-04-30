@@ -666,7 +666,9 @@ void rgblight_sethsv_slave(uint8_t hue, uint8_t sat, uint8_t val) { rgblight_set
 #endif  // ifndef RGBLIGHT_SPLIT
 
 #ifdef RGBLIGHT_LAYERS
-void rgblight_set_layer_state(uint8_t layer, bool enabled) {
+static int layerBrightness = 255;
+void rgblight_set_layer_state(uint8_t layer, bool enabled, int brightness) {
+    layerBrightness = brightness;
     rgblight_layer_mask_t mask = (rgblight_layer_mask_t)1 << layer;
     if (enabled) {
         rgblight_status.enabled_layer_mask |= mask;
@@ -694,6 +696,13 @@ bool rgblight_get_layer_state(uint8_t layer) {
 
 // Write any enabled LED layers into the buffer
 static void rgblight_layers_write(void) {
+    static uint8_t brightness = 0;
+
+    if(layerBrightness > 0)
+    {
+        brightness = layerBrightness;
+    }
+
     uint8_t i = 0;
     // For each layer
     for (const rgblight_segment_t *const *layer_ptr = rgblight_layers; i < RGBLIGHT_MAX_LAYERS; layer_ptr++, i++) {
@@ -714,7 +723,7 @@ static void rgblight_layers_write(void) {
             // Write segment.count LEDs
             LED_TYPE *const limit = &led[MIN(segment.index + segment.count, RGBLED_NUM)];
             for (LED_TYPE *led_ptr = &led[segment.index]; led_ptr < limit; led_ptr++) {
-                sethsv(segment.hue, segment.sat, segment.val, led_ptr);
+                sethsv(segment.hue, segment.sat, brightness, led_ptr);
             }
             segment_ptr++;
         }

@@ -213,7 +213,7 @@ typedef uint32_t rgblight_layer_mask_t;
             { __VA_ARGS__, NULL }
 
 // Get/set enabled rgblight layers
-void rgblight_set_layer_state(uint8_t layer, bool enabled);
+void rgblight_set_layer_state(uint8_t layer, bool enabled, int brightness);
 bool rgblight_get_layer_state(uint8_t layer);
 
 // Point this to an array of rgblight_segment_t arrays in keyboard_post_init_user to use rgblight layers
