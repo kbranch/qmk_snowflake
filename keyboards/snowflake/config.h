@@ -1,6 +1,4 @@
 /*
-Copyright 2018 Mattia Dal Ben <matthewdibi@gmail.com>
-
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
@@ -28,7 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DESCRIPTION     Weird tightly spaced custom keyboard
 
 /* key matrix size */
-// Rows are doubled-up
 #define MATRIX_ROWS 10
 #define MATRIX_COLS 7
 
@@ -43,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEBOUNCE 5
 
 /* serial.c configuration for split keyboard */
-#define SOFT_SERIAL_PIN D0
+#define SOFT_SERIAL_PIN D1
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE
@@ -51,15 +48,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LOCKING_RESYNC_ENABLE
 
 #define USE_SERIAL
-#define MASTER_LEFT
+#define SPLIT_USB_DETECT
 
 /* ws2812 RGB LED */
 #define RGB_DI_PIN D3
 
 #define RGBLED_NUM 8    // Number of LEDs
 #define DRIVER_LED_TOTAL (RGBLED_NUM * 2)
-// #define RGBLED_SPLIT { 9, 9}
-// #define RGBLIGHT_SPLIT
 #define RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_HUE_STEP 8
 #define RGBLIGHT_SAT_STEP 8
